@@ -1,6 +1,12 @@
 resource "aws_instance" "app_server" {
   ami           = data.aws_ami.ubuntu
   instance_type = "t2.micro"
+  key_name      = "tf-key-pair"
+  root_block_device {
+    // GB 단위
+    volume_size = 30
+    volume_type = "gp2"
+  }
 
   tags = {
     Name = "AppServerInstance"
